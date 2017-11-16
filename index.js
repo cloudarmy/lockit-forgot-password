@@ -300,8 +300,8 @@ ForgotPassword.prototype.postToken = function(req, res, next) {
     // check if token has expired
     if (new Date(user.pwdResetTokenExpires) < new Date()) {
       // make old token invalid
-      delete user.pwdResetToken;
-      delete user.pwdResetTokenExpires;
+      user.pwdResetToken = null;
+      user.pwdResetTokenExpires  = null;
 
       // update user in db
       return adapter.update(user, function(e) {
@@ -334,9 +334,9 @@ ForgotPassword.prototype.postToken = function(req, res, next) {
       user.salt = salt;
       user.derived_key = hash; // eslint-disable-line camelcase
 
-      // remove helper properties
-      delete user.pwdResetToken;
-      delete user.pwdResetTokenExpires;
+      // make old token invalid
+      user.pwdResetToken = null;
+      user.pwdResetTokenExpires  = null;
 
       // update user in db
       adapter.update(user, function(updateErr, updateUser) {
