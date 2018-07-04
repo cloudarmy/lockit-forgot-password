@@ -2,7 +2,7 @@
 
 var request = require('supertest');
 var should = require('should'); // eslint-disable-line no-unused-vars
-var uuid = require('node-uuid');
+var uuid = require('uuid');
 var utls = require('lockit-utils');
 
 var config = require('./app/config.js');
